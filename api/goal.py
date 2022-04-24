@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify, make_response
 from rds_db import get_db_conn, execute_query
+from models import db
 
 bp = Blueprint('goal', __name__, url_prefix='/goals')
 
