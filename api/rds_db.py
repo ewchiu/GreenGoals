@@ -16,7 +16,6 @@ def get_db_conn():
         password=pg_password,
         port=pg_port
     )
-    conn.commit
     return conn
 
 def execute_query(conn=None, query=None, query_params=None):
