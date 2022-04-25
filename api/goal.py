@@ -32,7 +32,14 @@ def get_post_goals():
             new_goal = GoalsModel(description=content["description"], category=content["category"], points=content["points"])
             db.session.add(new_goal)
             db.session.commit()
-            return jsonify(new_goal), 201
+
+            goal = {
+                "goal_id": new_goal.goal_id,
+                "description": new_goal.description,
+                "category": new_goal.category,
+                "points": new_goal.points
+            }
+            return jsonify(goal), 201
 
     else:
         res = make_response({"Error": "Method not recognized"})
