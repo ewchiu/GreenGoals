@@ -10,7 +10,7 @@ class GoalsModel(db.Model):
     category = db.Column(db.String())
     points = db.Column(db.Integer())
 
-    def __init__(self, description, points):
+    def __init__(self, description, category, points):
         self.description = description
         self.category = category
         self.points = points
