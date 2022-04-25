@@ -2,7 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
-class GoalModel(db.Model):
+class GoalsModel(db.Model):
     __tablename__ = 'goals'
 
     goal_id = db.Column(db.Integer, primary_key = True)

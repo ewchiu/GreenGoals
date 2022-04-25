@@ -1,7 +1,6 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
 from models import db
+from flask_migrate import Migrate
 
 import os
 import user
@@ -22,8 +21,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = f"postgresql://{pg_user}:{pg_password}@{
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 migrate = Migrate(app, db)
-
-db.init_app(app)
 
 @app.route("/")
 def hello_world():
