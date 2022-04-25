@@ -14,6 +14,7 @@ def get_post_goals():
             {
                 "goal_id": goal.goal_id,
                 "description": goal.description,
+                "category": goal.category,
                 "points": goal.points
             }
         for goal in goals]
@@ -23,11 +24,12 @@ def get_post_goals():
     elif request.method == 'POST':
         if request.is_json:
             content = request.get_json()
-            if 'description' not in content or 'points' not in content:
+            
+            if not verify_req_body(content):
                 error = {"Error": "The request object is missing at least one of the required attributes"}
                 return jsonify(error), 400
 
-            new_goal = GoalsModel(description=content["description"], points=content["points"])
+            new_goal = GoalsModel(description=content["description"], content=["category"], points=content["points"])
             db.session.add(new_goal)
             db.session.commit()
             return jsonify(new_goal), 201
@@ -36,7 +38,7 @@ def get_post_goals():
         res = make_response({"Error": "Method not recognized"})
         res.headers.set('Allow', ['GET', 'POST'])
         res.status_code = 405
-        return 
+        return res
 
 @bp.route('/<goal_id>', methods=['GET', 'PUT', 'DELETE'])
 def edit_delete_goals(goal_id):
@@ -46,6 +48,7 @@ def edit_delete_goals(goal_id):
         response = {
             "goal_id": goal.goal_id,
             "description": goal.description,
+            "category": goal.category,
             "points": goal.points
         }
         return jsonify(response), 200
@@ -58,6 +61,7 @@ def edit_delete_goals(goal_id):
             return jsonify(error), 400
 
         goal.description = content['description']
+        goal.category = content['category']
         goal.points = content['points']
         db.session.add(goal)
         db.session.commit()
@@ -77,7 +81,7 @@ def edit_delete_goals(goal_id):
         return res
 
 def verify_req_body(body):
-    goal_attributes = ['description', 'points']
+    goal_attributes = ['description', 'category', 'points']
     
     for attribute in goal_attributes:
         if attribute not in body:
