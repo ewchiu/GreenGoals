@@ -24,12 +24,12 @@ def get_post_goals():
     elif request.method == 'POST':
         if request.is_json:
             content = request.get_json()
-            
+
             if not verify_req_body(content):
                 error = {"Error": "The request object is missing at least one of the required attributes"}
                 return jsonify(error), 400
 
-            new_goal = GoalsModel(description=content["description"], content=["category"], points=content["points"])
+            new_goal = GoalsModel(description=content["description"], category=content["category"], points=content["points"])
             db.session.add(new_goal)
             db.session.commit()
             return jsonify(new_goal), 201
