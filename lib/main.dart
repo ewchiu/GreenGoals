@@ -52,25 +52,5 @@ class ListViewBuilder extends StatelessWidget {
           }
         }
     );
-
-    /*
-    goals = await service.getGoals();
-
-    return Scaffold(
-      appBar: AppBar(
-          title:const Text("GreenGoals")
-      ),
-      body: ListView.builder(
-          itemCount: goals.length,
-          itemBuilder: (BuildContext context, int index){
-            return ListTile(
-                leading: const Icon(Icons.list),
-                trailing: const Icon(Icons.check_box_outline_blank),
-                title:Text(goals[index].description)
-            );
-          }
-      ),
-    );
-    */
   }
 }
