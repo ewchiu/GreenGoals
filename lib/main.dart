@@ -15,14 +15,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: "GreenGoalsApp",
-        theme: ThemeData(
-            primarySwatch: Colors.green
-        ),
+        theme: ThemeData(primarySwatch: Colors.green),
         debugShowCheckedModeBanner: false,
-        home: const ListViewBuilder()
-    );
+        home: const ListViewBuilder());
   }
 }
+
 class ListViewBuilder extends StatelessWidget {
   const ListViewBuilder({Key? key}) : super(key: key);
 
@@ -33,24 +31,21 @@ class ListViewBuilder extends StatelessWidget {
         builder: (context, AsyncSnapshot<List<Goal>> goals) {
           if (goals.hasData) {
             return Scaffold(
-              appBar: AppBar(
-                  title:const Text("GreenGoals")
-              ),
+              appBar: AppBar(title: const Text("GreenGoals")),
               body: ListView.builder(
                   itemCount: goals.data?.length ?? 0,
-                  itemBuilder: (BuildContext context, int index){
+                  itemBuilder: (BuildContext context, int index) {
                     return ListTile(
                         leading: const Icon(Icons.list),
                         trailing: const Icon(Icons.check_box_outline_blank),
-                        title:Text(goals.data?[index].description ?? "")
-                    );
-                  }
-              ),
+                        title: Text(goals.data?[index].description ?? ""));
+                  }),
             );
           } else {
-            return const CircularProgressIndicator();
+            return const Center(
+                child: SizedBox(
+                    width: 30, height: 30, child: CircularProgressIndicator()));
           }
-        }
-    );
+        });
   }
 }
