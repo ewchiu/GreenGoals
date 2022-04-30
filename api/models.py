@@ -17,4 +17,8 @@ class GoalsModel(db.Model):
 
     def __repr__(self):
         return f"{self.goal_id}:{self.description}:{self.category}:{self.points}"
-        
+
+class UsersModel(db.Model):
+    __tablename__ = 'users'
+
+    user_id = db.Column(db.Integer, primary_key = True)        

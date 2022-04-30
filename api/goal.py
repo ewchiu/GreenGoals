@@ -8,6 +8,7 @@ bp = Blueprint('goal', __name__, url_prefix='/goals')
 @bp.route('', methods=['GET', 'POST'])
 def get_post_goals():
 
+    # get all existing goals
     if request.method == 'GET':
         goals = GoalsModel.query.all()
         results = [
@@ -21,6 +22,7 @@ def get_post_goals():
 
         return jsonify({"count": len(goals), "goals": results}), 200
 
+    # create new goal
     elif request.method == 'POST':
         if request.is_json:
             content = request.get_json()
@@ -51,6 +53,7 @@ def get_post_goals():
 def edit_delete_goals(goal_id):
     goal = GoalsModel.query.get_or_404(goal_id)
 
+    # get goal by id
     if request.method == 'GET':
         response = {
             "goal_id": goal.goal_id,
@@ -60,6 +63,7 @@ def edit_delete_goals(goal_id):
         }
         return jsonify(response), 200
 
+    # edit goal by id
     elif request.method == 'PUT':
         content = request.get_json()
 
@@ -76,6 +80,7 @@ def edit_delete_goals(goal_id):
         message = {"Message": "The object was successfully updated"}
         return jsonify(message), 201
 
+    # delete goal
     elif request.method == 'DELETE':
         db.session.delete(goal)
         db.session.commit()
@@ -88,6 +93,10 @@ def edit_delete_goals(goal_id):
         return res
 
 def verify_req_body(body):
+    """
+    Takes JSON body in as parameter
+    Returns boolean based on whether body contains all required goal attributes
+    """
     goal_attributes = ['description', 'category', 'points']
     
     for attribute in goal_attributes:
