@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "858189952746",
+    "project_id": "test-drive-auth-51c24",
+    "storage_bucket": "test-drive-auth-51c24.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:858189952746:android:e75c6e1845b165c9338993",
+        "android_client_info": {
+          "package_name": "com.justiner.greengoals"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "858189952746-9a9vmgcvhsdmt17ovs1rod4qshke0qvo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDaB_1BIWm934AEM18ecuM2vOYYczT3SIc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "858189952746-9a9vmgcvhsdmt17ovs1rod4qshke0qvo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
