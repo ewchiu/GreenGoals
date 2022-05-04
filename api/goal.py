@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify, make_response, Response
 from models import GoalsModel
 from app import db
+from fb_auth import verify_token
 
 bp = Blueprint('goal', __name__, url_prefix='/goals')
 
@@ -50,6 +51,7 @@ def get_post_goals():
         return res
 
 @bp.route('/<goal_id>', methods=['GET', 'PUT', 'DELETE'])
+@verify_token
 def edit_delete_goals(goal_id):
     goal = GoalsModel.query.get_or_404(goal_id)
 
@@ -104,3 +106,4 @@ def verify_req_body(body):
             return False
 
     return True
+    
