@@ -46,7 +46,7 @@ def get_post_users():
         return res
 
 @bp.route('/<email>', methods=['GET', 'POST'])
-@verify_token
+# @verify_token
 def add_points(email):
     user = UsersModel.query.get_or_404(email)
 
