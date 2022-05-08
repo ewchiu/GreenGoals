@@ -129,6 +129,7 @@ def goals_for_user(uid):
         return res
 
 @bp.route('/<user_id>/goals/<id>', methods=['PATCH'])
+# @verify_token
 def update_goal_for_user(user_id, id):
     user = UsersModel.query.get_or_404(user_id)
     usersgoal = UsersGoalsModel.query.get_or_404(id)
