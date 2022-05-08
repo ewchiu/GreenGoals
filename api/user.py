@@ -102,7 +102,7 @@ def goals_for_user(uid):
                 "user_id": new_usergoal.user_id,
                 "goal_id": new_usergoal.goal_id,
                 "date_assigned": new_usergoal.date_assigned,
-                "date_completed": new_usergoal.complete
+                "complete": new_usergoal.complete
             }
             return jsonify(usergoal), 201
 
@@ -117,7 +117,7 @@ def goals_for_user(uid):
                     "user_id": goal.user_id,
                     "goal_id": goal.goal_id,
                     "date_assigned": goal.date_assigned,
-                    "date_completed": goal.complete
+                    "complete": goal.complete
                 } 
             for goal in usersgoals]
             return jsonify({"count": len(usersgoals), "goals": results}), 200 
