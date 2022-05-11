@@ -40,9 +40,9 @@ class ListViewBuilder extends StatelessWidget {
                   itemCount: goals.data?.length ?? 0,
                   itemBuilder: (BuildContext context, int index){
                     return ListTile(
-                        leading: const Icon(Icons.list),
+                        leading: Icon(goals.data?[index].categoryIcon ?? Icons.list),
                         trailing: const Icon(Icons.check_box_outline_blank),
-                        title:Text(goals.data?[index].description ?? "")
+                        title: Text(goals.data?[index].description ?? "")
                     );
                   }
               ),
