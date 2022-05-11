@@ -35,6 +35,7 @@ Future<List<Goal>> getGoals() async {
     print(e);
   }
 
+  goalsList.shuffle();
   return goalsList;
 }
 
