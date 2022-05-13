@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect
+from flask import Flask, request, redirect, render_template
 from firebase_admin import credentials
 from flask_migrate import Migrate
 from models import db
@@ -32,6 +32,10 @@ firebase = firebase_admin.initialize_app(cred)
 @app.route("/")
 def login():
     return "<p>Please login through the GreenGoals mobile app.</p>"
+
+@app.route("/api_spec")
+def api_spec():
+    return render_template('GreenGoals_API_Spec.html')
     
 
 if __name__ == '__main__':
