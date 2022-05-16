@@ -1,14 +1,16 @@
-from flask import Flask
-from models import db
+from flask import Flask, request, redirect, render_template
+from firebase_admin import credentials
 from flask_migrate import Migrate
+from models import db
 
+import firebase_admin
 import os
 import user
 import goal
 
 app = Flask(__name__)
 
-# configure DB
+# connect to DB
 pg_user = os.environ.get('PG_USERNAME')
 pg_password = os.environ.get('PG_PASSWORD')
 pg_host = os.environ.get('PG_HOST')
@@ -23,9 +25,18 @@ migrate = Migrate(app, db)
 app.register_blueprint(goal.bp)
 app.register_blueprint(user.bp)
 
+# connect to firebase
+cred = credentials.Certificate('fbAdminConfig.json')
+firebase = firebase_admin.initialize_app(cred)
+
 @app.route("/")
-def hello_world():
-    return "<h1>Please navigate GreenGoals using the mobile app.</h1>"
+def login():
+    return "<p>Please login through the GreenGoals mobile app.</p>"
+
+@app.route("/api_spec")
+def api_spec():
+    return render_template('GreenGoals_API_Spec.html')
+    
 
 if __name__ == '__main__':
 	app.run(host='0.0.0.0', debug=False)
