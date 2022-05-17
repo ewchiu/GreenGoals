@@ -20,6 +20,7 @@ Future<List<Goal>> getGoals() async {
 
       for (var goal in rawGoals) {
         print(goal);
+
         Goal currGoal = Goal(
             goal["category"],
             getIcon(goal["category"]),
@@ -31,7 +32,7 @@ Future<List<Goal>> getGoals() async {
         goalsList.add(currGoal);
       }
     }
-  } catch(e) {
+  } catch (e) {
     print(e);
   }
 
