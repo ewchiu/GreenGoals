@@ -12,21 +12,24 @@ class ListViewBuilder extends StatelessWidget {
         builder: (context, AsyncSnapshot<List<Goal>> goals) {
           if (goals.hasData) {
             return Scaffold(
-              appBar: AppBar(title: const Text("GreenGoals")),
+              appBar: AppBar(
+                  title:const Text("GreenGoals")
+              ),
               body: ListView.builder(
-                  itemCount: goals.data?.length ?? 0,
+                  itemCount: 5,
                   itemBuilder: (BuildContext context, int index) {
                     return ListTile(
-                        leading: const Icon(Icons.list),
+                        leading: Icon(goals.data?[index].categoryIcon ?? Icons.list),
                         trailing: const Icon(Icons.check_box_outline_blank),
-                        title: Text(goals.data?[index].description ?? ""));
-                  }),
+                        title: Text(goals.data?[index].description ?? "")
+                    );
+                  }
+              ),
             );
           } else {
-            return const Center(
-                child: SizedBox(
-                    width: 30, height: 30, child: CircularProgressIndicator()));
+            return const CircularProgressIndicator();
           }
-        });
+        }
+    );
   }
 }
