@@ -738,11 +738,11 @@ margin-bottom: 20px;
                       <a href="#api-Goals-updateGoal">updateGoal</a>
                     </li>
                   <li class="nav-header" data-group="Users"><a href="#api-Users">API Methods - Users</a></li>
+                    <li data-group="Users" data-name="addPoints" class="">
+                      <a href="#api-Users-addPoints">addPoints</a>
+                    </li>
                     <li data-group="Users" data-name="addUser" class="">
                       <a href="#api-Users-addUser">addUser</a>
-                    </li>
-                    <li data-group="Users" data-name="createUser" class="">
-                      <a href="#api-Users-createUser">createUser</a>
                     </li>
                     <li data-group="Users" data-name="createUsersGoal" class="">
                       <a href="#api-Users-createUsersGoal">createUsersGoal</a>
@@ -2263,6 +2263,358 @@ $(document).ready(function() {
                   </section>
                 <section id="api-Users">
                   <h1>Users</h1>
+                    <div id="api-Users-addPoints">
+                      <article id="api-Users-addPoints-0" data-group="User" data-name="addPoints" data-version="0">
+                        <div class="pull-left">
+                          <h1>addPoints</h1>
+                          <p>Adds points to user account</p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked">Adds points to the user account with the given email</p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/users/{email}</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-Users-addPoints-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-Users-addPoints-0-java">Java</a></li>
+                          <li class=""><a href="#examples-Users-addPoints-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-Users-addPoints-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-Users-addPoints-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-Users-addPoints-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-Users-addPoints-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-Users-addPoints-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-Users-addPoints-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-Users-addPoints-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-Users-addPoints-0-python">Python</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Users-addPoints-0-curl">
+                            <pre class="prettyprint"><code class="language-bsh">curl -X POST "https://virtserver.swaggerhub.com/OSU56/GreenGoals/1.0.0/users/{email}"</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-Users-addPoints-0-java">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import io.swagger.client.api.UsersApi;
+
+import java.io.File;
+import java.util.*;
+
+public class UsersApiExample {
+
+    public static void main(String[] args) {
+        
+        UsersApi apiInstance = new UsersApi();
+        String email = email_example; // String | email of the user to add points
+        New_user body = ; // New_user | adds point value specified in req body to the user account with the given email
+        try {
+            user result = apiInstance.addPoints(email, body);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling UsersApi#addPoints");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-Users-addPoints-0-android">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.UsersApi;
+
+public class UsersApiExample {
+
+    public static void main(String[] args) {
+        UsersApi apiInstance = new UsersApi();
+        String email = email_example; // String | email of the user to add points
+        New_user body = ; // New_user | adds point value specified in req body to the user account with the given email
+        try {
+            user result = apiInstance.addPoints(email, body);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling UsersApi#addPoints");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-Users-addPoints-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-Users-addPoints-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">String *email = email_example; // email of the user to add points
+New_user *body = ; // adds point value specified in req body to the user account with the given email
+
+UsersApi *apiInstance = [[UsersApi alloc] init];
+
+// Adds points to user account
+[apiInstance addPointsWith:email
+    body:body
+              completionHandler: ^(user output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Users-addPoints-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var GreenGoalsApi = require('green_goals_api');
+
+var api = new GreenGoalsApi.UsersApi()
+
+var email = email_example; // {String} email of the user to add points
+
+var body = ; // {New_user} adds point value specified in req body to the user account with the given email
+
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.addPoints(email, body, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-Users-addPoints-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-Users-addPoints-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using IO.Swagger.Api;
+using IO.Swagger.Client;
+using IO.Swagger.Model;
+
+namespace Example
+{
+    public class addPointsExample
+    {
+        public void main()
+        {
+            
+            var apiInstance = new UsersApi();
+            var email = email_example;  // String | email of the user to add points
+            var body = new New_user(); // New_user | adds point value specified in req body to the user account with the given email
+
+            try
+            {
+                // Adds points to user account
+                user result = apiInstance.addPoints(email, body);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling UsersApi.addPoints: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Users-addPoints-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new Swagger\Client\Api\UsersApi();
+$email = email_example; // String | email of the user to add points
+$body = ; // New_user | adds point value specified in req body to the user account with the given email
+
+try {
+    $result = $api_instance->addPoints($email, $body);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling UsersApi->addPoints: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Users-addPoints-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::SwaggerClient::Configuration;
+use WWW::SwaggerClient::UsersApi;
+
+my $api_instance = WWW::SwaggerClient::UsersApi->new();
+my $email = email_example; # String | email of the user to add points
+my $body = WWW::SwaggerClient::Object::New_user->new(); # New_user | adds point value specified in req body to the user account with the given email
+
+eval { 
+    my $result = $api_instance->addPoints(email => $email, body => $body);
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling UsersApi->addPoints: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Users-addPoints-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.UsersApi()
+email = email_example # String | email of the user to add points
+body =  # New_user | adds point value specified in req body to the user account with the given email
+
+try: 
+    # Adds points to user account
+    api_response = api_instance.add_points(email, body)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling UsersApi->addPoints: %s\n" % e)</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Parameters</h2>
+
+                            <div class="methodsubtabletitle">Path parameters</div>
+                            <table id="methodsubtable">
+                                <tr>
+                                  <th width="150px">Name</th>
+                                  <th>Description</th>
+                                </tr>
+                                  <tr><td style="width:150px;">email*</td>
+<td>
+
+
+    <div id="d2e199_addPoints_email">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description">
+                        email of the user to add points
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                            </table>
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+<td>
+
+
+<script>
+$(document).ready(function() {
+  var schemaWrapper = {
+  "in" : "body",
+  "name" : "body",
+  "description" : "adds point value specified in req body to the user account with the given email",
+  "required" : true,
+  "schema" : {
+    "$ref" : "#/definitions/new_user"
+  }
+};
+  var schema = schemaWrapper.schema;
+  if (schema.$ref != null) {
+    schema = defsParser.$refs.get(schema.$ref);
+  } else {
+    schemaWrapper.definitions = Object.assign({}, defs);
+    $RefParser.dereference(schemaWrapper).catch(function(err) {
+      console.log(err);
+    });
+  }
+
+  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+  var result = $('#d2e199_addPoints_body');
+  result.empty();
+  result.append(view.render());
+});
+</script>
+<div id="d2e199_addPoints_body"></div>
+</td>
+</tr>
+
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 201 - Item updated </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-addPoints-201-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-addPoints-201-schema">
+                                  <div id='responses-addPoints-201-schema-201' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "Item updated",
+  "schema" : {
+    "$ref" : "#/definitions/user"
+  }
+};
+                                        var schema = schemaWrapper.schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.definitions = defs;
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-addPoints-201-schema-data').val(stringify(schema));
+                                        var result = $('#responses-addPoints-201-schema-201');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-addPoints-201-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                            <h3> Status: 400 - invalid input, object invalid </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                            </div>
+
+                        </article>
+                      </div>
+                      <hr>
                     <div id="api-Users-addUser">
                       <article id="api-Users-addUser-0" data-group="User" data-name="addUser" data-version="0">
                         <div class="pull-left">
@@ -2561,358 +2913,6 @@ $(document).ready(function() {
                                     </script>
                                   </div>
                                   <input id='responses-addUser-201-schema-data' type='hidden' value=''></input>
-                                </div>
-                            </div>
-
-                            <h3> Status: 400 - invalid input, object invalid </h3>
-
-                            <ul class="nav nav-tabs nav-tabs-examples" >
-                            </ul>
-
-                            <div class="tab-content" style='margin-bottom: 10px;'>
-                            </div>
-
-                        </article>
-                      </div>
-                      <hr>
-                    <div id="api-Users-createUser">
-                      <article id="api-Users-createUser-0" data-group="User" data-name="createUser" data-version="0">
-                        <div class="pull-left">
-                          <h1>createUser</h1>
-                          <p>Creates user by email</p>
-                        </div>
-                        <div class="pull-right"></div>
-                        <div class="clearfix"></div>
-                        <p></p>
-                        <p class="marked">Creates user by email</p>
-                        <p></p>
-                        <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/users/{email}</span></code></pre>
-                        <p>
-                          <h3>Usage and SDK Samples</h3>
-                        </p>
-                        <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><a href="#examples-Users-createUser-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Users-createUser-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Users-createUser-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Users-createUser-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Users-createUser-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Users-createUser-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Users-createUser-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Users-createUser-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Users-createUser-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Users-createUser-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Users-createUser-0-python">Python</a></li>
-                        </ul>
-
-                        <div class="tab-content">
-                          <div class="tab-pane active" id="examples-Users-createUser-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X POST "https://virtserver.swaggerhub.com/OSU56/GreenGoals/1.0.0/users/{email}"</code></pre>
-                          </div>
-                          <div class="tab-pane" id="examples-Users-createUser-0-java">
-                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
-import io.swagger.client.auth.*;
-import io.swagger.client.model.*;
-import io.swagger.client.api.UsersApi;
-
-import java.io.File;
-import java.util.*;
-
-public class UsersApiExample {
-
-    public static void main(String[] args) {
-        
-        UsersApi apiInstance = new UsersApi();
-        String email = email_example; // String | email of the user to create
-        New_user body = ; // New_user | creates new user with contents, points should usually be set to 0 for new user
-        try {
-            goal result = apiInstance.createUser(email, body);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling UsersApi#createUser");
-            e.printStackTrace();
-        }
-    }
-}</code></pre>
-                          </div>
-
-                          <div class="tab-pane" id="examples-Users-createUser-0-android">
-                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.UsersApi;
-
-public class UsersApiExample {
-
-    public static void main(String[] args) {
-        UsersApi apiInstance = new UsersApi();
-        String email = email_example; // String | email of the user to create
-        New_user body = ; // New_user | creates new user with contents, points should usually be set to 0 for new user
-        try {
-            goal result = apiInstance.createUser(email, body);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling UsersApi#createUser");
-            e.printStackTrace();
-        }
-    }
-}</code></pre>
-                          </div>
-  <!--
-  <div class="tab-pane" id="examples-Users-createUser-0-groovy">
-  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
-  </div> -->
-                            <div class="tab-pane" id="examples-Users-createUser-0-objc">
-                              <pre class="prettyprint"><code class="language-cpp">String *email = email_example; // email of the user to create
-New_user *body = ; // creates new user with contents, points should usually be set to 0 for new user
-
-UsersApi *apiInstance = [[UsersApi alloc] init];
-
-// Creates user by email
-[apiInstance createUserWith:email
-    body:body
-              completionHandler: ^(goal output, NSError* error) {
-                            if (output) {
-                                NSLog(@"%@", output);
-                            }
-                            if (error) {
-                                NSLog(@"Error: %@", error);
-                            }
-                        }];
-</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-Users-createUser-0-javascript">
-                              <pre class="prettyprint"><code class="language-js">var GreenGoalsApi = require('green_goals_api');
-
-var api = new GreenGoalsApi.UsersApi()
-
-var email = email_example; // {String} email of the user to create
-
-var body = ; // {New_user} creates new user with contents, points should usually be set to 0 for new user
-
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.createUser(email, body, callback);
-</code></pre>
-                            </div>
-
-                            <!--<div class="tab-pane" id="examples-Users-createUser-0-angular">
-              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
-            </div>-->
-                            <div class="tab-pane" id="examples-Users-createUser-0-csharp">
-                              <pre class="prettyprint"><code class="language-cs">using System;
-using System.Diagnostics;
-using IO.Swagger.Api;
-using IO.Swagger.Client;
-using IO.Swagger.Model;
-
-namespace Example
-{
-    public class createUserExample
-    {
-        public void main()
-        {
-            
-            var apiInstance = new UsersApi();
-            var email = email_example;  // String | email of the user to create
-            var body = new New_user(); // New_user | creates new user with contents, points should usually be set to 0 for new user
-
-            try
-            {
-                // Creates user by email
-                goal result = apiInstance.createUser(email, body);
-                Debug.WriteLine(result);
-            }
-            catch (Exception e)
-            {
-                Debug.Print("Exception when calling UsersApi.createUser: " + e.Message );
-            }
-        }
-    }
-}
-</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-Users-createUser-0-php">
-                              <pre class="prettyprint"><code class="language-php"><&#63;php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-$api_instance = new Swagger\Client\Api\UsersApi();
-$email = email_example; // String | email of the user to create
-$body = ; // New_user | creates new user with contents, points should usually be set to 0 for new user
-
-try {
-    $result = $api_instance->createUser($email, $body);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling UsersApi->createUser: ', $e->getMessage(), PHP_EOL;
-}
-?></code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-Users-createUser-0-perl">
-                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
-use WWW::SwaggerClient::Configuration;
-use WWW::SwaggerClient::UsersApi;
-
-my $api_instance = WWW::SwaggerClient::UsersApi->new();
-my $email = email_example; # String | email of the user to create
-my $body = WWW::SwaggerClient::Object::New_user->new(); # New_user | creates new user with contents, points should usually be set to 0 for new user
-
-eval { 
-    my $result = $api_instance->createUser(email => $email, body => $body);
-    print Dumper($result);
-};
-if ($@) {
-    warn "Exception when calling UsersApi->createUser: $@\n";
-}</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-Users-createUser-0-python">
-                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
-import time
-import swagger_client
-from swagger_client.rest import ApiException
-from pprint import pprint
-
-# create an instance of the API class
-api_instance = swagger_client.UsersApi()
-email = email_example # String | email of the user to create
-body =  # New_user | creates new user with contents, points should usually be set to 0 for new user
-
-try: 
-    # Creates user by email
-    api_response = api_instance.create_user(email, body)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling UsersApi->createUser: %s\n" % e)</code></pre>
-                            </div>
-                          </div>
-
-                          <h2>Parameters</h2>
-
-                            <div class="methodsubtabletitle">Path parameters</div>
-                            <table id="methodsubtable">
-                                <tr>
-                                  <th width="150px">Name</th>
-                                  <th>Description</th>
-                                </tr>
-                                  <tr><td style="width:150px;">email*</td>
-<td>
-
-
-    <div id="d2e199_createUser_email">
-        <div class="json-schema-view">
-            <div class="primitive">
-                <span class="type">
-                    String
-                </span>
-
-                    <div class="inner description">
-                        email of the user to create
-                    </div>
-            </div>
-                <div class="inner required">
-                    Required
-                </div>
-        </div>
-    </div>
-</td>
-</tr>
-
-                            </table>
-
-
-                            <div class="methodsubtabletitle">Body parameters</div>
-                            <table id="methodsubtable">
-                              <tr>
-                                <th width="150px">Name</th>
-                                <th>Description</th>
-                              </tr>
-                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
-<td>
-
-
-<script>
-$(document).ready(function() {
-  var schemaWrapper = {
-  "in" : "body",
-  "name" : "body",
-  "description" : "creates new user with contents, points should usually be set to 0 for new user",
-  "required" : true,
-  "schema" : {
-    "$ref" : "#/definitions/new_user"
-  }
-};
-  var schema = schemaWrapper.schema;
-  if (schema.$ref != null) {
-    schema = defsParser.$refs.get(schema.$ref);
-  } else {
-    schemaWrapper.definitions = Object.assign({}, defs);
-    $RefParser.dereference(schemaWrapper).catch(function(err) {
-      console.log(err);
-    });
-  }
-
-  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
-  var result = $('#d2e199_createUser_body');
-  result.empty();
-  result.append(view.render());
-});
-</script>
-<div id="d2e199_createUser_body"></div>
-</td>
-</tr>
-
-                            </table>
-
-
-
-                          <h2>Responses</h2>
-                            <h3> Status: 201 - Item created </h3>
-
-                            <ul class="nav nav-tabs nav-tabs-examples" >
-                                <li class="active">
-                                  <a data-toggle="tab" href="#responses-createUser-201-schema">Schema</a>
-                                </li>
-
-                            </ul>
-
-                            <div class="tab-content" style='margin-bottom: 10px;'>
-                                <div class="tab-pane active" id="responses-createUser-201-schema">
-                                  <div id='responses-createUser-201-schema-201' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
-                                    <script>
-                                      $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "Item created",
-  "schema" : {
-    "$ref" : "#/definitions/goal"
-  }
-};
-                                        var schema = schemaWrapper.schema;
-                                        if (schema.$ref != null) {
-                                          schema = defsParser.$refs.get(schema.$ref);
-                                        } else {
-                                          schemaWrapper.definitions = defs;
-                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
-                                            console.log(err);
-                                          });
-                                        }
-
-                                        //console.log(JSON.stringify(schema));
-                                        var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-createUser-201-schema-data').val(stringify(schema));
-                                        var result = $('#responses-createUser-201-schema-201');
-                                        result.empty();
-                                        result.append(view.render());
-                                      });
-                                    </script>
-                                  </div>
-                                  <input id='responses-createUser-201-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
 

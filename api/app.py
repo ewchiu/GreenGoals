@@ -33,9 +33,9 @@ firebase = firebase_admin.initialize_app(cred)
 def login():
     return "<p>Please login through the GreenGoals mobile app.</p>"
 
-@app.route("/api_spec")
+@app.route("/api")
 def api_spec():
-    return render_template('GreenGoals_API_Spec.html')
+    return render_template('GreenGoalsAPI.html')
     
 
 if __name__ == '__main__':
