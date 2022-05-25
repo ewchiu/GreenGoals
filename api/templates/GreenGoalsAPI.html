@@ -699,11 +699,11 @@ margin-bottom: 20px;
         defs["goal"] = {"type":"object","properties":{"goal_id":{"type":"integer"},"description":{"type":"string"},"category":{"type":"string"},"points":{"type":"integer"}}};
         defs["goal_list"] = {"type":"object","properties":{"count":{"type":"integer"},"goals":{"type":"array","items":{"$ref":"#/definitions/goal"}}}};
         defs["new_goal"] = {"type":"object","properties":{"description":{"type":"string"},"category":{"type":"string"},"points":{"type":"integer"}}};
-        defs["new_user"] = {"type":"object","properties":{"points":{"type":"integer"}}};
+        defs["new_user"] = {"type":"object","properties":{"email":{"type":"string"}}};
         defs["new_user_goal"] = {"type":"object","properties":{"goal_id":{"type":"integer"}}};
         defs["user"] = {"type":"object","properties":{"user_id":{"type":"integer"},"email":{"type":"string"},"points":{"type":"integer"}}};
         defs["user_goal"] = {"type":"object","properties":{"id":{"type":"integer"},"user_id":{"type":"integer"},"goal_id":{"type":"integer"},"date_assigned":{"type":"string"},"complete":{"type":"boolean"}}};
-        defs["user_list"] = {"type":"object","properties":{"count":{"type":"integer"},"goals":{"type":"array","items":{"$ref":"#/definitions/user"}}}};
+        defs["user_list"] = {"type":"object","properties":{"count":{"type":"integer"},"users":{"type":"array","items":{"$ref":"#/definitions/user"}}}};
         defs["users_goals"] = {"type":"object","properties":{"count":{"type":"integer"},"goals":{"type":"array","items":{"$ref":"#/definitions/user_goal"}}}};
   </script>
 
@@ -2663,9 +2663,9 @@ public class UsersApiExample {
     public static void main(String[] args) {
         
         UsersApi apiInstance = new UsersApi();
-        New_goal body = ; // New_goal | Creates new goal to add
+        New_user body = ; // New_user | Creates new goal to add
         try {
-            goal result = apiInstance.addUser(body);
+            user result = apiInstance.addUser(body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling UsersApi#addUser");
@@ -2682,9 +2682,9 @@ public class UsersApiExample {
 
     public static void main(String[] args) {
         UsersApi apiInstance = new UsersApi();
-        New_goal body = ; // New_goal | Creates new goal to add
+        New_user body = ; // New_user | Creates new goal to add
         try {
-            goal result = apiInstance.addUser(body);
+            user result = apiInstance.addUser(body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling UsersApi#addUser");
@@ -2698,13 +2698,13 @@ public class UsersApiExample {
   <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
   </div> -->
                             <div class="tab-pane" id="examples-Users-addUser-0-objc">
-                              <pre class="prettyprint"><code class="language-cpp">New_goal *body = ; // Creates new goal to add
+                              <pre class="prettyprint"><code class="language-cpp">New_user *body = ; // Creates new goal to add
 
 UsersApi *apiInstance = [[UsersApi alloc] init];
 
 // Adds a new user
 [apiInstance addUserWith:body
-              completionHandler: ^(goal output, NSError* error) {
+              completionHandler: ^(user output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
                             }
@@ -2720,7 +2720,7 @@ UsersApi *apiInstance = [[UsersApi alloc] init];
 
 var api = new GreenGoalsApi.UsersApi()
 
-var body = ; // {New_goal} Creates new goal to add
+var body = ; // {New_user} Creates new goal to add
 
 
 var callback = function(error, data, response) {
@@ -2752,12 +2752,12 @@ namespace Example
         {
             
             var apiInstance = new UsersApi();
-            var body = new New_goal(); // New_goal | Creates new goal to add
+            var body = new New_user(); // New_user | Creates new goal to add
 
             try
             {
                 // Adds a new user
-                goal result = apiInstance.addUser(body);
+                user result = apiInstance.addUser(body);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -2775,7 +2775,7 @@ namespace Example
 require_once(__DIR__ . '/vendor/autoload.php');
 
 $api_instance = new Swagger\Client\Api\UsersApi();
-$body = ; // New_goal | Creates new goal to add
+$body = ; // New_user | Creates new goal to add
 
 try {
     $result = $api_instance->addUser($body);
@@ -2792,7 +2792,7 @@ use WWW::SwaggerClient::Configuration;
 use WWW::SwaggerClient::UsersApi;
 
 my $api_instance = WWW::SwaggerClient::UsersApi->new();
-my $body = WWW::SwaggerClient::Object::New_goal->new(); # New_goal | Creates new goal to add
+my $body = WWW::SwaggerClient::Object::New_user->new(); # New_user | Creates new goal to add
 
 eval { 
     my $result = $api_instance->addUser(body => $body);
@@ -2812,7 +2812,7 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = swagger_client.UsersApi()
-body =  # New_goal | Creates new goal to add
+body =  # New_user | Creates new goal to add
 
 try: 
     # Adds a new user
@@ -2845,7 +2845,7 @@ $(document).ready(function() {
   "description" : "Creates new goal to add",
   "required" : true,
   "schema" : {
-    "$ref" : "#/definitions/new_goal"
+    "$ref" : "#/definitions/new_user"
   }
 };
   var schema = schemaWrapper.schema;
@@ -2890,7 +2890,7 @@ $(document).ready(function() {
                                         var schemaWrapper = {
   "description" : "item created",
   "schema" : {
-    "$ref" : "#/definitions/goal"
+    "$ref" : "#/definitions/user"
   }
 };
                                         var schema = schemaWrapper.schema;
@@ -2975,8 +2975,8 @@ public class UsersApiExample {
     public static void main(String[] args) {
         
         UsersApi apiInstance = new UsersApi();
-        Integer userId = 56; // Integer | email of the user to create
-        New_user_goal body = ; // New_user_goal | creates new user with contents, points should usually be set to 0 for new user
+        Integer userId = 56; // Integer | user_id of the user to assign goal
+        New_user_goal body = ; // New_user_goal | assigns the goal to the user at the current date
         try {
             user_goal result = apiInstance.createUsersGoal(userId, body);
             System.out.println(result);
@@ -2995,8 +2995,8 @@ public class UsersApiExample {
 
     public static void main(String[] args) {
         UsersApi apiInstance = new UsersApi();
-        Integer userId = 56; // Integer | email of the user to create
-        New_user_goal body = ; // New_user_goal | creates new user with contents, points should usually be set to 0 for new user
+        Integer userId = 56; // Integer | user_id of the user to assign goal
+        New_user_goal body = ; // New_user_goal | assigns the goal to the user at the current date
         try {
             user_goal result = apiInstance.createUsersGoal(userId, body);
             System.out.println(result);
@@ -3012,8 +3012,8 @@ public class UsersApiExample {
   <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
   </div> -->
                             <div class="tab-pane" id="examples-Users-createUsersGoal-0-objc">
-                              <pre class="prettyprint"><code class="language-cpp">Integer *userId = 56; // email of the user to create
-New_user_goal *body = ; // creates new user with contents, points should usually be set to 0 for new user
+                              <pre class="prettyprint"><code class="language-cpp">Integer *userId = 56; // user_id of the user to assign goal
+New_user_goal *body = ; // assigns the goal to the user at the current date
 
 UsersApi *apiInstance = [[UsersApi alloc] init];
 
@@ -3036,9 +3036,9 @@ UsersApi *apiInstance = [[UsersApi alloc] init];
 
 var api = new GreenGoalsApi.UsersApi()
 
-var userId = 56; // {Integer} email of the user to create
+var userId = 56; // {Integer} user_id of the user to assign goal
 
-var body = ; // {New_user_goal} creates new user with contents, points should usually be set to 0 for new user
+var body = ; // {New_user_goal} assigns the goal to the user at the current date
 
 
 var callback = function(error, data, response) {
@@ -3070,8 +3070,8 @@ namespace Example
         {
             
             var apiInstance = new UsersApi();
-            var userId = 56;  // Integer | email of the user to create
-            var body = new New_user_goal(); // New_user_goal | creates new user with contents, points should usually be set to 0 for new user
+            var userId = 56;  // Integer | user_id of the user to assign goal
+            var body = new New_user_goal(); // New_user_goal | assigns the goal to the user at the current date
 
             try
             {
@@ -3094,8 +3094,8 @@ namespace Example
 require_once(__DIR__ . '/vendor/autoload.php');
 
 $api_instance = new Swagger\Client\Api\UsersApi();
-$userId = 56; // Integer | email of the user to create
-$body = ; // New_user_goal | creates new user with contents, points should usually be set to 0 for new user
+$userId = 56; // Integer | user_id of the user to assign goal
+$body = ; // New_user_goal | assigns the goal to the user at the current date
 
 try {
     $result = $api_instance->createUsersGoal($userId, $body);
@@ -3112,8 +3112,8 @@ use WWW::SwaggerClient::Configuration;
 use WWW::SwaggerClient::UsersApi;
 
 my $api_instance = WWW::SwaggerClient::UsersApi->new();
-my $userId = 56; # Integer | email of the user to create
-my $body = WWW::SwaggerClient::Object::New_user_goal->new(); # New_user_goal | creates new user with contents, points should usually be set to 0 for new user
+my $userId = 56; # Integer | user_id of the user to assign goal
+my $body = WWW::SwaggerClient::Object::New_user_goal->new(); # New_user_goal | assigns the goal to the user at the current date
 
 eval { 
     my $result = $api_instance->createUsersGoal(userId => $userId, body => $body);
@@ -3133,8 +3133,8 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = swagger_client.UsersApi()
-userId = 56 # Integer | email of the user to create
-body =  # New_user_goal | creates new user with contents, points should usually be set to 0 for new user
+userId = 56 # Integer | user_id of the user to assign goal
+body =  # New_user_goal | assigns the goal to the user at the current date
 
 try: 
     # Assigns goal to a user
@@ -3165,7 +3165,7 @@ except ApiException as e:
                 </span>
 
                     <div class="inner description">
-                        email of the user to create
+                        user_id of the user to assign goal
                     </div>
             </div>
                 <div class="inner required">
@@ -3194,7 +3194,7 @@ $(document).ready(function() {
   var schemaWrapper = {
   "in" : "body",
   "name" : "body",
-  "description" : "creates new user with contents, points should usually be set to 0 for new user",
+  "description" : "assigns the goal to the user at the current date",
   "required" : true,
   "schema" : {
     "$ref" : "#/definitions/new_user_goal"
