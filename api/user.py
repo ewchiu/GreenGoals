@@ -49,7 +49,7 @@ def get_post_users():
 @bp.route('/<email>', methods=['GET', 'POST'])
 # @verify_token
 def add_points(email):
-    user = UsersModel.query.get_or_404(email)
+    user = UsersModel.query.filter(UsersModel.email.contains(email)).first()
 
     if request.method == 'POST':
         if request.is_json:
