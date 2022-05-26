@@ -107,20 +107,17 @@ def goals_for_user(uid):
             return jsonify(usergoal), 201
 
     elif request.method == 'GET':
-        if request.is_json:
-            content = request.get_json()
-
-            usersgoals = UsersGoalsModel.query.filter_by(user_id=user.user_id).all()
-            results = [
-                {
-                    "id": goal.id,
-                    "user_id": goal.user_id,
-                    "goal_id": goal.goal_id,
-                    "date_assigned": goal.date_assigned,
-                    "complete": goal.complete
-                } 
-            for goal in usersgoals]
-            return jsonify({"count": len(usersgoals), "goals": results}), 200 
+        usersgoals = UsersGoalsModel.query.filter_by(user_id=user.user_id).all()
+        results = [
+            {
+                "id": goal.id,
+                "user_id": goal.user_id,
+                "goal_id": goal.goal_id,
+                "date_assigned": goal.date_assigned,
+                "complete": goal.complete
+            } 
+        for goal in usersgoals]
+        return jsonify({"count": len(usersgoals), "goals": results}), 200 
 
     else:
         res = make_response({"Error": "Method not recognized"})
