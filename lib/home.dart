@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:greengoals/goals_response.dart';
 import 'service.dart' as service;
 
-class ListViewBuilder extends StatelessWidget {
-  const ListViewBuilder({Key? key}) : super(key: key);
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
