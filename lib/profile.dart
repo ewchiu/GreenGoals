@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:greengoals/goals_response.dart';
 import 'service.dart' as service;
 
-class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
+class ProfilePage extends StatelessWidget {
+  const ProfilePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

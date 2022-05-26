@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfire_ui/auth.dart';
-import 'home.dart';
+import 'main_screen.dart';
 
 class AuthGate extends StatelessWidget {
   const AuthGate({Key? key}) : super(key: key);
@@ -21,7 +21,7 @@ class AuthGate extends StatelessWidget {
         }
 
         // Render your application if authenticated
-        return const HomeScreen();
+        return const MainScreen();
       },
     );
   }
