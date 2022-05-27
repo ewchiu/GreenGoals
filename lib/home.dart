@@ -10,6 +10,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<Goal>>(
@@ -19,10 +20,17 @@ class _HomePageState extends State<HomePage> {
             return ListView.builder(
                 itemCount: 5,
                 itemBuilder: (BuildContext context, int index) {
-                  return ListTile(
-                      leading: Icon(goals.data?[index].categoryIcon ?? Icons.list),
-                      trailing: const Icon(Icons.check_box_outline_blank),
-                      title: Text(goals.data?[index].description ?? "")
+                  return CheckboxListTile(
+                    value: false,
+                    onChanged: (bool? newValue) {
+                      markGoal(newValue, index);
+                    },
+                    title: Text(goals.data?[index].description ?? ""),
+                    secondary: Container(
+                      height: 25,
+                      width: 25,
+                      child: Icon(goals.data?[index].categoryIcon ?? Icons.list),
+                    ),
                   );
                 }
             );
@@ -31,5 +39,11 @@ class _HomePageState extends State<HomePage> {
           }
         }
     );
+  }
+
+  void markGoal(bool? newValue, int index) {
+    setState(() {
+      //checkBoxListTileModel[index].isCheck = val;
+    });
   }
 }
