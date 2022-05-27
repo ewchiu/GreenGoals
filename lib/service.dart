@@ -198,8 +198,8 @@ Future<UserResponse> addPoints(String email, int points) async {
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
-      body: jsonEncode(<String, String>{
-        'points': points.toString()
+      body: jsonEncode(<String, int>{
+        'points': points
       }),
     );
 
