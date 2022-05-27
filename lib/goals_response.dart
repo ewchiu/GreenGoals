@@ -17,3 +17,20 @@ class Goal {
 
   Goal(this.category, this.categoryIcon, this.description, this.goalId, this.points);
 }
+
+class UserGoalsResponse {
+  int count = 0;
+  List<UserGoal> userGoals = [];
+
+  UserGoalsResponse(this.count, this.userGoals);
+}
+
+class UserGoal {
+  int id = 0;
+  int userId = 0;
+  int goalId = 0;
+  String dateAssigned = "";
+  bool complete = false;
+
+  UserGoal(this.id, this.userId, this.goalId, this.dateAssigned, this.complete);
+}
