@@ -13,6 +13,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   FirebaseAuth auth = FirebaseAuth.instance;
+  int userId = 0;
+  String userEmail = "";
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +26,9 @@ class _HomePageState extends State<HomePage> {
                 itemCount: 5,
                 itemBuilder: (BuildContext context, int index) {
                   return CheckboxListTile(
-                    value: false,
+                    value: goals.data?[index][1].complete ?? false,
                     onChanged: (bool? newValue) {
-                      markGoal(newValue, index);
+                      markGoal(goals.data?[index][1].id ?? -1, goals.data?[index][0].points ?? 0);
                     },
                     title: Text(goals.data?[index][0].description ?? ""),
                     secondary: Container(
@@ -44,15 +46,20 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void markGoal(bool? newValue, int index) {
-    setState(() {
-      //checkBoxListTileModel[index].isCheck = val;
-    });
+  void markGoal(int userGoalId, int points) {
+    if (userGoalId != -1) {
+      setState(() {
+        service.updateUsersGoal(userId, userGoalId);
+        service.addPoints(userEmail, points);  // TODO: Why does this return a 500 status code?
+      });
+    }
   }
 
   Future<int> getUserId(String email) async {
+    userEmail = email;
     UserResponse usrResponse = await service.getUser(email);
-    return usrResponse.userId;
+    userId = usrResponse.userId;
+    return userId;
   }
 
   Future<String?> getUserEmail(FirebaseAuth auth) async {
