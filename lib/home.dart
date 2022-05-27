@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:greengoals/goals_response.dart';
 import 'package:greengoals/user_response.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'service.dart' as service;
 
 class HomePage extends StatefulWidget {
@@ -11,11 +12,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  FirebaseAuth auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<Goal>>(
-        future: getOrCreateUsersGoals("roysrboy@gmail.com"),
+        future: getOrCreateUsersGoals(auth),
         builder: (context, AsyncSnapshot<List<Goal>> goals) {
           if (goals.hasData) {
             return ListView.builder(
@@ -53,28 +55,37 @@ class _HomePageState extends State<HomePage> {
     return usrResponse.userId;
   }
 
-  Future<List<Goal>> getOrCreateUsersGoals(String email) async {
-    int userId = await getUserId(email);
-    UserGoalsResponse currUserGoals = await service.getUsersGoals(userId);
+  Future<String?> getUserEmail(FirebaseAuth auth) async {
+    return await auth.currentUser?.email;
+  }
+
+  Future<List<Goal>> getOrCreateUsersGoals(FirebaseAuth auth) async {
     List<Goal> currGoals = [];
+    String? email = await getUserEmail(auth);
+    print("Email address is: $email");
 
-    if (currUserGoals.count == 0) {
-      // Get random 5 goals
-      List<Goal> allGoals = await service.getGoals();
+    if (email != null) {
+      int userId = await getUserId(email);
+      UserGoalsResponse currUserGoals = await service.getUsersGoals(userId);
 
-      // createUsersGoal loop with the id's
-      for (int i=0; i<5; i++) {
-        await service.createUsersGoal(userId, allGoals[i].goalId);
+      if (currUserGoals.count == 0) {
+        // Get random 5 goals
+        List<Goal> allGoals = await service.getGoals();
+
+        // createUsersGoal loop with the id's
+        for (int i = 0; i < 5; i++) {
+          await service.createUsersGoal(userId, allGoals[i].goalId);
+        }
+
+        // Repull getUsersGoals and return
+        currUserGoals = await service.getUsersGoals(userId);
       }
 
-      // Repull getUsersGoals and return
-      currUserGoals = await service.getUsersGoals(userId);
-    }
-
-    // Map UserGoals list to Goal list
-    for (var usrGoal in currUserGoals.userGoals) {
-      Goal currGoal = await service.getGoal(usrGoal.goalId);
-      currGoals.add(currGoal);
+      // Map UserGoals list to Goal list
+      for (var usrGoal in currUserGoals.userGoals) {
+        Goal currGoal = await service.getGoal(usrGoal.goalId);
+        currGoals.add(currGoal);
+      }
     }
 
     return currGoals;
