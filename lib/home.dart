@@ -16,9 +16,9 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<Goal>>(
+    return FutureBuilder<List<List<dynamic>>>(
         future: getOrCreateUsersGoals(auth),
-        builder: (context, AsyncSnapshot<List<Goal>> goals) {
+        builder: (context, AsyncSnapshot<List<List<dynamic>>> goals) {
           if (goals.hasData) {
             return ListView.builder(
                 itemCount: 5,
@@ -28,11 +28,11 @@ class _HomePageState extends State<HomePage> {
                     onChanged: (bool? newValue) {
                       markGoal(newValue, index);
                     },
-                    title: Text(goals.data?[index].description ?? ""),
+                    title: Text(goals.data?[index][0].description ?? ""),
                     secondary: Container(
                       height: 25,
                       width: 25,
-                      child: Icon(goals.data?[index].categoryIcon ?? Icons.list),
+                      child: Icon(goals.data?[index][0].categoryIcon ?? Icons.list),
                     ),
                   );
                 }
@@ -59,8 +59,8 @@ class _HomePageState extends State<HomePage> {
     return await auth.currentUser?.email;
   }
 
-  Future<List<Goal>> getOrCreateUsersGoals(FirebaseAuth auth) async {
-    List<Goal> currGoals = [];
+  Future<List<List<dynamic>>> getOrCreateUsersGoals(FirebaseAuth auth) async {
+    List<List<dynamic>> currGoals = [];
     String? email = await getUserEmail(auth);
     print("Email address is: $email");
 
@@ -84,7 +84,7 @@ class _HomePageState extends State<HomePage> {
       // Map UserGoals list to Goal list
       for (var usrGoal in currUserGoals.userGoals) {
         Goal currGoal = await service.getGoal(usrGoal.goalId);
-        currGoals.add(currGoal);
+        currGoals.add([currGoal, usrGoal]);
       }
     }
 
