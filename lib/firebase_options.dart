@@ -32,6 +32,16 @@ class DefaultFirebaseOptions {
           'DefaultFirebaseOptions have not been configured for macos - '
           'you can reconfigure this by running the FlutterFire CLI again.',
         );
+      case TargetPlatform.windows:
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for windows - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
+      case TargetPlatform.linux:
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for linux - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       default:
         throw UnsupportedError(
           'DefaultFirebaseOptions are not supported for this platform.',
@@ -40,20 +50,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDaB_1BIWm934AEM18ecuM2vOYYczT3SIc',
-    appId: '1:858189952746:android:e75c6e1845b165c9338993',
-    messagingSenderId: '858189952746',
-    projectId: 'test-drive-auth-51c24',
-    storageBucket: 'test-drive-auth-51c24.appspot.com',
+    apiKey: 'AIzaSyBuT-mDQ86LPPOLah_9is6vJ2qaYv7r8y4',
+    appId: '1:730130898414:android:4be46985e168b639a682ff',
+    messagingSenderId: '730130898414',
+    projectId: 'greengoals-237e8',
+    storageBucket: 'greengoals-237e8.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCu_OmRFZqEbLrmbjMoDHQBS8nBXvq9rzc',
-    appId: '1:858189952746:ios:adb23240598af76c338993',
-    messagingSenderId: '858189952746',
-    projectId: 'test-drive-auth-51c24',
-    storageBucket: 'test-drive-auth-51c24.appspot.com',
-    iosClientId: '858189952746-nnb9krpfsl1rktmei95snrki8dvj5v49.apps.googleusercontent.com',
+    apiKey: 'AIzaSyCR9MoU2eQi-Y87v4gBSHUiLI_4DscU4do',
+    appId: '1:730130898414:ios:c0d40ab0eb057fc8a682ff',
+    messagingSenderId: '730130898414',
+    projectId: 'greengoals-237e8',
+    storageBucket: 'greengoals-237e8.appspot.com',
+    iosClientId: '730130898414-b7vtnnfhuh9uv8qneb5dsbtujrqaq83p.apps.googleusercontent.com',
     iosBundleId: 'com.justiner.greengoals',
   );
 }
