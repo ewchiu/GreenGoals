@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:greengoals/goals_response.dart';
 import 'service.dart' as service;
 import 'home.dart';
-import 'profile.dart';
+import 'summary_week.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -16,22 +16,18 @@ class _MainScreenState extends State<MainScreen> {
 
   final pages = [
     const HomePage(),
-    const ProfilePage(),
+    const SummaryWeek(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          title: const Text("GreenGoals")
-      ),
+      appBar: AppBar(title: const Text("GreenGoals")),
       body: pages[pageIndex],
       bottomNavigationBar: Container(
         height: 60,
         decoration: BoxDecoration(
-          color: Theme
-              .of(context)
-              .primaryColor,
+          color: Theme.of(context).primaryColor,
           borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(20),
             topRight: Radius.circular(20),
