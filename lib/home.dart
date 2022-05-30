@@ -28,7 +28,8 @@ class _HomePageState extends State<HomePage> {
                   return CheckboxListTile(
                     value: goals.data?[index][1].complete ?? false,
                     onChanged: (bool? newValue) {
-                      markGoal(goals.data?[index][1].id ?? -1, goals.data?[index][0].points ?? 0);
+                      //markGoal(goals.data?[index][1].id ?? -1, goals.data?[index][0].points ?? 0);
+                      maybeMarkGoalCompleted(goals.data?[index][0], goals.data?[index][1]);
                     },
                     title: Text(goals.data?[index][0].description ?? ""),
                     secondary: Container(
@@ -46,11 +47,11 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void markGoal(int userGoalId, int points) {
-    if (userGoalId != -1) {
+  void maybeMarkGoalCompleted(Goal? goal, UserGoal? usrGoal) {
+    if (goal != null && usrGoal != null && usrGoal.id != -1 && !usrGoal.complete) {
       setState(() {
-        service.updateUsersGoal(userId, userGoalId);
-        service.addPoints(userEmail, points);  // TODO: Why does this return a 500 status code?
+        service.updateUsersGoal(userId, usrGoal.id);
+        service.addPoints(userEmail, goal.points);
       });
     }
   }
