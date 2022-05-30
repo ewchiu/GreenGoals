@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:greengoals/goals_response.dart';
 import 'package:greengoals/user_response.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:intl/intl.dart';
 import 'service.dart' as service;
 
 class HomePage extends StatefulWidget {
@@ -28,7 +29,8 @@ class _HomePageState extends State<HomePage> {
                   return CheckboxListTile(
                     value: goals.data?[index][1].complete ?? false,
                     onChanged: (bool? newValue) {
-                      markGoal(goals.data?[index][1].id ?? -1, goals.data?[index][0].points ?? 0);
+                      //markGoal(goals.data?[index][1].id ?? -1, goals.data?[index][0].points ?? 0);
+                      maybeMarkGoalCompleted(goals.data?[index][0], goals.data?[index][1]);
                     },
                     title: Text(goals.data?[index][0].description ?? ""),
                     secondary: Container(
@@ -40,17 +42,27 @@ class _HomePageState extends State<HomePage> {
                 }
             );
           } else {
-            return const CircularProgressIndicator();
+            return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    CircularProgressIndicator(),
+                  ],
+                )
+            );
+
+            //return const CircularProgressIndicator();
           }
         }
     );
   }
 
-  void markGoal(int userGoalId, int points) {
-    if (userGoalId != -1) {
+  void maybeMarkGoalCompleted(Goal? goal, UserGoal? usrGoal) {
+    if (goal != null && usrGoal != null && usrGoal.id != -1 && !usrGoal.complete) {
       setState(() {
-        service.updateUsersGoal(userId, userGoalId);
-        service.addPoints(userEmail, points);  // TODO: Why does this return a 500 status code?
+        service.updateUsersGoal(userId, usrGoal.id);
+        service.addPoints(userEmail, goal.points);
       });
     }
   }
@@ -75,7 +87,7 @@ class _HomePageState extends State<HomePage> {
       int userId = await getUserId(email);
       UserGoalsResponse currUserGoals = await service.getUsersGoals(userId);
 
-      if (currUserGoals.count == 0) {
+      if (!hasUsersGoalsToday(currUserGoals)) {
         // Get random 5 goals
         List<Goal> allGoals = await service.getGoals();
 
@@ -88,13 +100,36 @@ class _HomePageState extends State<HomePage> {
         currUserGoals = await service.getUsersGoals(userId);
       }
 
-      // Map UserGoals list to Goal list
+      // Map today's UserGoals list to Goal list
+      var formatter = DateFormat('yyyy-MM-dd');
+      String today = formatter.format(DateTime.now().toUtc());
+
       for (var usrGoal in currUserGoals.userGoals) {
-        Goal currGoal = await service.getGoal(usrGoal.goalId);
-        currGoals.add([currGoal, usrGoal]);
+        if (usrGoal.dateAssigned == today) {
+          Goal currGoal = await service.getGoal(usrGoal.goalId);
+          currGoals.add([currGoal, usrGoal]);
+        }
       }
     }
 
     return currGoals;
+  }
+
+  bool hasUsersGoalsToday(UserGoalsResponse currUserGoals) {
+    bool hasGoalsToday = false;
+
+    if (currUserGoals.count != 0) {
+      var formatter = DateFormat('yyyy-MM-dd');
+      String today = formatter.format(DateTime.now().toUtc());
+
+      for (var usrGoal in currUserGoals.userGoals) {
+        if (usrGoal.dateAssigned == today) {
+          hasGoalsToday = true;
+          break;
+        }
+      }
+    }
+
+    return hasGoalsToday;
   }
 }
