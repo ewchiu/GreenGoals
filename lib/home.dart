@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:greengoals/goals_response.dart';
 import 'package:greengoals/user_response.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:intl/intl.dart';
 import 'service.dart' as service;
 
 class HomePage extends StatefulWidget {
@@ -22,6 +23,7 @@ class _HomePageState extends State<HomePage> {
         future: getOrCreateUsersGoals(auth),
         builder: (context, AsyncSnapshot<List<List<dynamic>>> goals) {
           if (goals.hasData) {
+            print("goals = $goals");
             return ListView.builder(
                 itemCount: 5,
                 itemBuilder: (BuildContext context, int index) {
@@ -86,7 +88,7 @@ class _HomePageState extends State<HomePage> {
       int userId = await getUserId(email);
       UserGoalsResponse currUserGoals = await service.getUsersGoals(userId);
 
-      if (currUserGoals.count == 0) {
+      if (!hasUsersGoalsToday(currUserGoals)) {
         // Get random 5 goals
         List<Goal> allGoals = await service.getGoals();
 
@@ -99,13 +101,35 @@ class _HomePageState extends State<HomePage> {
         currUserGoals = await service.getUsersGoals(userId);
       }
 
-      // Map UserGoals list to Goal list
+      // Map today's UserGoals list to Goal list
+      var formatter = DateFormat('yyyy-MM-dd');
+      String today = formatter.format(DateTime.now());
+
       for (var usrGoal in currUserGoals.userGoals) {
-        Goal currGoal = await service.getGoal(usrGoal.goalId);
-        currGoals.add([currGoal, usrGoal]);
+          print("Adding usrGoal...");
+          Goal currGoal = await service.getGoal(usrGoal.goalId);
+          currGoals.add([currGoal, usrGoal]);
       }
     }
 
     return currGoals;
+  }
+
+  bool hasUsersGoalsToday(UserGoalsResponse currUserGoals) {
+    bool hasGoalsToday = false;
+
+    if (currUserGoals.count != 0) {
+      var formatter = DateFormat('yyyy-MM-dd');
+      String today = formatter.format(DateTime.now());
+
+      for (var usrGoal in currUserGoals.userGoals) {
+        if (usrGoal.dateAssigned == today) {
+          hasGoalsToday = true;
+          break;
+        }
+      }
+    }
+
+    return hasGoalsToday;
   }
 }
