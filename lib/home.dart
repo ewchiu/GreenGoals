@@ -106,9 +106,12 @@ class _HomePageState extends State<HomePage> {
       String today = formatter.format(DateTime.now());
 
       for (var usrGoal in currUserGoals.userGoals) {
+        print("usrGoal.dateAssigned = ${usrGoal.dateAssigned}, today = $today");
+        if (usrGoal.dateAssigned == today) {
           print("Adding usrGoal...");
           Goal currGoal = await service.getGoal(usrGoal.goalId);
           currGoals.add([currGoal, usrGoal]);
+        }
       }
     }
 
@@ -123,6 +126,7 @@ class _HomePageState extends State<HomePage> {
       String today = formatter.format(DateTime.now());
 
       for (var usrGoal in currUserGoals.userGoals) {
+        print("usrGoal.dateAssigned = ${usrGoal.dateAssigned}, today = $today");
         if (usrGoal.dateAssigned == today) {
           hasGoalsToday = true;
           break;
