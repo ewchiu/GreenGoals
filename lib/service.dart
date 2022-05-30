@@ -20,8 +20,6 @@ Future<List<Goal>> getGoals() async {
       var rawGoals = responseData["goals"];
 
       for (var goal in rawGoals) {
-        print(goal);
-
         Goal currGoal = Goal(
             goal["category"],
             getIcon(goal["category"]),

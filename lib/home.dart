@@ -23,7 +23,6 @@ class _HomePageState extends State<HomePage> {
         future: getOrCreateUsersGoals(auth),
         builder: (context, AsyncSnapshot<List<List<dynamic>>> goals) {
           if (goals.hasData) {
-            print("goals = $goals");
             return ListView.builder(
                 itemCount: 5,
                 itemBuilder: (BuildContext context, int index) {
@@ -103,12 +102,10 @@ class _HomePageState extends State<HomePage> {
 
       // Map today's UserGoals list to Goal list
       var formatter = DateFormat('yyyy-MM-dd');
-      String today = formatter.format(DateTime.now());
+      String today = formatter.format(DateTime.now().toUtc());
 
       for (var usrGoal in currUserGoals.userGoals) {
-        print("usrGoal.dateAssigned = ${usrGoal.dateAssigned}, today = $today");
         if (usrGoal.dateAssigned == today) {
-          print("Adding usrGoal...");
           Goal currGoal = await service.getGoal(usrGoal.goalId);
           currGoals.add([currGoal, usrGoal]);
         }
@@ -123,10 +120,9 @@ class _HomePageState extends State<HomePage> {
 
     if (currUserGoals.count != 0) {
       var formatter = DateFormat('yyyy-MM-dd');
-      String today = formatter.format(DateTime.now());
+      String today = formatter.format(DateTime.now().toUtc());
 
       for (var usrGoal in currUserGoals.userGoals) {
-        print("usrGoal.dateAssigned = ${usrGoal.dateAssigned}, today = $today");
         if (usrGoal.dateAssigned == today) {
           hasGoalsToday = true;
           break;
